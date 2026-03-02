@@ -88,6 +88,45 @@ docker compose up --build
 
 ---
 
-## License
+## Testing & CI/CD
 
-MIT
+LazyDrop has comprehensive test coverage and automated CI/CD pipelines:
+
+### Running Tests Locally
+
+**Backend (Maven):**
+```bash
+cd apps/backend
+mvn clean test                    # Run all tests
+mvn test jacoco:report           # Generate coverage report
+```
+
+**Frontend (npm):**
+```bash
+cd apps/frontend
+npm test -- --run                # Run all tests
+npm run test:coverage            # Generate coverage report
+npm run test:ui                  # Interactive test UI
+```
+
+### GitHub Actions Pipelines
+
+Three automated workflows ensure code quality:
+
+1. **Backend Tests & Code Quality** — Runs Maven tests, generates coverage, performs SonarQube analysis
+2. **Frontend Tests & Build** — Runs Vitest, ESLint, and builds Next.js app
+3. **Docker Build & Push** — Builds images, scans with Trivy, pushes to registry
+
+**Status badges & reports:** Available in GitHub Actions tab
+
+### Documentation
+
+- **[TESTING.md](./TESTING.md)** — Comprehensive testing guide (unit, integration, coverage)
+- **[CI_CD.md](./CI_CD.md)** — Pipeline setup, workflows, and troubleshooting
+
+**Test Coverage:**
+- Backend: 43 tests (6 test classes with mocks + TestContainers)
+- Frontend: 24+ tests (components + utilities)
+- Target: 80%+ coverage
+
+---
