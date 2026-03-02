@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: lazydrop-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: lazydrop
+      POSTGRES_USER: lazydrop
+      POSTGRES_PASSWORD: lazydrop
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U lazydrop"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    container_name: lazydrop-backend
+    build:
+      context: ./apps/backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      # override DB host for Docker network
+      DATABASE_URL: jdbc:postgresql://db:5432/lazydrop
+      DATABASE_USERNAME: lazydrop
+      DATABASE_PASSWORD: lazydrop
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    container_name: lazydrop-frontend
+    build:
+      context: ./apps/frontend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:8080/api/v1
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
