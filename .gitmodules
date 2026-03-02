@@ -1,0 +1,6 @@
+[submodule "apps/backend"]
+	path = apps/backend
+	url = https://github.com/10xDeVv/LazyDrop-Backend.git
+[submodule "apps/frontend"]
+	path = apps/frontend
+	url = https://github.com/10xDeVv/LazyDrop-Frontend.git
