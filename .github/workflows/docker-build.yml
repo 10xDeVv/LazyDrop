@@ -4,6 +4,8 @@ on:
   push:
     branches: [ main, develop ]
     paths:
+      - 'apps/backend'
+      - 'apps/frontend'
       - 'apps/backend/**'
       - 'apps/frontend/**'
       - 'docker-compose.yml'
