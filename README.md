@@ -1,6 +1,13 @@
 # LazyDrop
 
-LazyDrop is a real-time, session-based file sharing platform. Users create temporary “drop sessions”, invite others via a short code (or QR), then upload files using secure signed URLs while everyone in the session receives live updates.
+# LazyDrop
+
+[![Backend Tests](https://github.com/10xDeVv/LazyDrop/actions/workflows/backend-test.yml/badge.svg)](https://github.com/10xDeVv/LazyDrop/actions/workflows/backend-test.yml)
+[![Frontend Tests](https://github.com/10xDeVv/LazyDrop/actions/workflows/frontend-test.yml/badge.svg)](https://github.com/10xDeVv/LazyDrop/actions/workflows/frontend-test.yml)
+[![Docker Build](https://github.com/10xDeVv/LazyDrop/actions/workflows/docker-build.yml/badge.svg)](https://github.com/10xDeVv/LazyDrop/actions/workflows/docker-build.yml)
+[![Qodana](https://github.com/10xDeVv/LazyDrop/actions/workflows/qodana_code_quality.yml/badge.svg)](https://github.com/10xDeVv/LazyDrop/actions/workflows/qodana_code_quality.yml)
+
+LazyDrop is a real-time, session-based file sharing platform. Users create temporary "drop sessions", invite others via a short code (or QR), then upload files using secure signed URLs while everyone in the session receives live updates.
 
 Live demo: https://lazydrop.app
 
