@@ -43,6 +43,7 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+          cache-dependency-path: apps/backend/pom.xml
 
       - name: Create test .env file
         working-directory: apps/backend
@@ -106,6 +107,7 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+          cache-dependency-path: apps/backend/pom.xml
 
       - name: Create build .env file
         working-directory: apps/backend
@@ -154,6 +156,7 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: maven
+          cache-dependency-path: apps/backend/pom.xml
 
       - name: Run SonarQube analysis
         working-directory: apps/backend
