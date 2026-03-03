@@ -87,6 +87,14 @@ erDiagram
     TIMESTAMPTZ created_at
   }
 
+    drop_session_note {
+        UUID id PK
+        UUID drop_session_id
+        UUID participant_id
+        VARCHAR content
+        TIMESTAMPTZ created_at
+    }
+
   drop_file_download {
     UUID id PK
     UUID file_id FK

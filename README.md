@@ -136,4 +136,4 @@ Three automated workflows ensure code quality:
 - Frontend: 24+ tests (components + utilities)
 - Target: 80%+ coverage
 
----
+---  
