@@ -78,10 +78,10 @@ docker compose up --build
 
 ## Documentation
 
-- **SYSTEM_DESIGN.md** — architecture + flows (uploads, sessions, webhooks, scaling notes)
-- **ARCHITECTURE.md** — module breakdown + data model diagram
-- **SECURITY.md** — security model and operational rules
-- **CONTRIBUTING.md** — PR workflow + local dev + submodules
+- **[SYSTEM_DESIGN.md](./SYSTEM_DESIGN.md)** — architecture + flows (uploads, sessions, webhooks, scaling notes)
+- **[ARCHITECTURE.md](./ARCHITECTURE.md)** — module breakdown + data model diagram
+- **[SECURITY.md](./SECURITY.md)** — security model and operational rules
+- **[CONTRIBUTING](./CONTRIBUTING)** — PR workflow + local dev + submodules
 
 ---
 
