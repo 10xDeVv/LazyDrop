@@ -1,14 +1,18 @@
 name: Backend Tests & Code Quality
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main, develop ]
     paths:
+      - 'apps/backend'
       - 'apps/backend/**'
       - '.github/workflows/backend-test.yml'
+      - '.gitmodules'
   pull_request:
     branches: [ main, develop ]
     paths:
+      - 'apps/backend'
       - 'apps/backend/**'
 
 jobs:
@@ -56,13 +60,19 @@ jobs:
           SUPABASE_URL=https://test.supabase.co
           SUPABASE_ANON_KEY=test_key
           SUPABASE_JWT_SECRET=test_secret
-          SUPABASE_SERVICE_KEY=test_service_key
-          SUPABASE_BUCKET_NAME=test-bucket
+          SPACES_ENDPOINT=https://nyc3.digitaloceanspaces.com
+          SPACES_REGION=nyc3
+          SPACES_BUCKET=test-bucket
+          SPACES_ACCESS_KEY=test_access_key
+          SPACES_SECRET_KEY=test_secret_key
+          SPACES_CDN_ENDPOINT=
           CORS_ALLOWED_ORIGINS=http://localhost:3000
           APP_FRONTEND_URL=http://localhost:3000
           APP_COOKIES_SECURE=false
           STRIPE_TEST_SECRET_KEY=sk_test_example
           STRIPE_WEBHOOK_SECRET=whsec_test
+          STRIPE_PRICE_PRO=price_test_pro
+          STRIPE_PRICE_PLUS=price_test_plus
           EOF
 
       - name: Run tests with Maven
@@ -75,11 +85,19 @@ jobs:
           SUPABASE_URL: https://test.supabase.co
           SUPABASE_ANON_KEY: test_key
           SUPABASE_JWT_SECRET: test_secret
-          SUPABASE_SERVICE_KEY: test_service_key
-          SUPABASE_BUCKET_NAME: test-bucket
+          SPACES_ENDPOINT: https://nyc3.digitaloceanspaces.com
+          SPACES_REGION: nyc3
+          SPACES_BUCKET: test-bucket
+          SPACES_ACCESS_KEY: test_access_key
+          SPACES_SECRET_KEY: test_secret_key
+          SPACES_CDN_ENDPOINT: ''
           CORS_ALLOWED_ORIGINS: http://localhost:3000
           APP_FRONTEND_URL: http://localhost:3000
+          APP_COOKIES_SECURE: 'false'
           STRIPE_TEST_SECRET_KEY: sk_test_example
+          STRIPE_WEBHOOK_SECRET: whsec_test
+          STRIPE_PRICE_PRO: price_test_pro
+          STRIPE_PRICE_PLUS: price_test_plus
 
       - name: Generate code coverage report
         working-directory: apps/backend

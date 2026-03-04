@@ -1,14 +1,18 @@
 name: Frontend Tests & Build
 
 on:
+  workflow_dispatch:
   push:
     branches: [ main, develop ]
     paths:
+      - 'apps/frontend'
       - 'apps/frontend/**'
       - '.github/workflows/frontend-test.yml'
+      - '.gitmodules'
   pull_request:
     branches: [ main, develop ]
     paths:
+      - 'apps/frontend'
       - 'apps/frontend/**'
 
 jobs:
@@ -72,7 +76,7 @@ jobs:
           cat > .env.local << EOF
           NEXT_PUBLIC_SUPABASE_URL=https://placeholder.supabase.co
           NEXT_PUBLIC_SUPABASE_ANON_KEY=placeholder
-          NEXT_PUBLIC_API_URL=http://localhost:8080/api/v1
+          NEXT_PUBLIC_API_URL=http://localhost:8080
           EOF
 
       - name: Build application
@@ -81,7 +85,7 @@ jobs:
         env:
           NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
           NEXT_PUBLIC_SUPABASE_ANON_KEY: placeholder
-          NEXT_PUBLIC_API_URL: http://localhost:8080/api/v1
+          NEXT_PUBLIC_API_URL: http://localhost:8080
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
