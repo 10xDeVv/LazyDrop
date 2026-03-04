@@ -35,7 +35,7 @@ We will acknowledge receipt within 48 hours and aim to release a fix within 7 da
 - Signature verification must never be disabled.
 
 ### File Storage
-- Files are uploaded via server-side proxy or S3 pre-signed URLs with short expiry (5 minutes for upload, 1 hour for download).
+- Files are uploaded directly to object storage via S3 pre-signed URLs with short expiry (5 minutes for upload, 1 hour for download). The backend never handles file bytes.
 - All uploaded files are automatically deleted when a session ends.
 - File size limits are enforced server-side per subscription plan.
 

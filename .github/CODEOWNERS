@@ -1,0 +1,12 @@
+# Default owner for everything in the repo
+* @10xDeVv
+
+# Backend
+apps/backend/ @10xDeVv
+
+# Frontend
+apps/frontend/ @10xDeVv
+
+# CI/CD and infra
+.github/ @10xDeVv
+docker-compose.yml @10xDeVv
