@@ -15,7 +15,7 @@ flowchart TB
   BE -->|JPA/Hibernate| DB[(PostgreSQL Database)]
   FE -->|Auth JWT| SBAuth[Supabase Auth]
   BE -->|JWT validation| SBAuth
-  BE -->|Signed URLs| SBStore[Supabase Storage]
+  BE -->|Signed URLs| SBStore[DO Spaces / S3]
 
   FE -->|Checkout| Stripe[Stripe Checkout]
   Stripe -->|Webhooks| BE
@@ -97,10 +97,10 @@ These events are broadcast to session participants (example destination: `/topic
 
 ## Two-Phase File Upload (Signed URL Pattern)
 
-Files are uploaded directly to Supabase Storage. The backend never receives file bytes.
+Files are uploaded directly to DigitalOcean Spaces (S3-compatible). The backend never receives file bytes.
 
 1) Client requests a signed upload URL  
-2) Client uploads directly to Supabase Storage  
+2) Client uploads directly to DO Spaces via S3 pre-signed PUT  
 3) Client confirms upload → backend writes metadata
 
 ```mermaid
@@ -108,7 +108,7 @@ sequenceDiagram
   autonumber
   participant FE as Frontend
   participant BE as Backend API
-  participant S as Supabase Storage
+  participant S as DO Spaces (S3)
   participant DB as Postgres
 
   FE->>BE: POST /sessions/{id}/files/upload-url (metadata)
@@ -208,7 +208,7 @@ Automated background jobs keep the system clean and consistent:
 flowchart LR
   Scheduler[Spring Scheduler] -->|every N minutes| Cleanup[Cleanup Service]
   Cleanup --> DB[(Postgres)]
-  Cleanup -->|optional| Storage[Supabase Storage]
+  Cleanup -->|optional| Storage[DO Spaces / S3]
   Cleanup -->|broadcast| WS[STOMP Notifications]
 ```
 

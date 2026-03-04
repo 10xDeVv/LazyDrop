@@ -14,7 +14,8 @@ Live demo: https://lazydrop.app
 This repository is an **umbrella repo** that provides documentation, diagrams, and a one-command local development setup. The app runs in production with:
 - Frontend on Vercel
 - Backend on DigitalOcean
-- Supabase for Auth + Storage
+- Supabase for Auth
+- DigitalOcean Spaces for file storage (S3-compatible CDN)
 - Stripe for subscriptions/payments
 
 ---
@@ -43,7 +44,7 @@ This repository is an **umbrella repo** that provides documentation, diagrams, a
 
 **Infra**
 - Docker Compose local dev
-- Supabase Storage signed URLs
+- DigitalOcean Spaces CDN (S3 pre-signed URLs)
 - Vercel + DigitalOcean production
 
 ---
@@ -61,7 +62,7 @@ Create your local env file:
 
 ```bash
 cp .env.example .env
-# fill in required Supabase + Stripe test keys
+# fill in required Supabase auth, DO Spaces, + Stripe test keys
 ```
 
 Start everything:

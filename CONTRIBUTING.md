@@ -12,7 +12,7 @@ This project is open-sourced primarily as a portfolio project, but contributions
 git clone --recurse-submodules https://github.com/<your-username>/lazydrop
 cd lazydrop
 cp .env.example .env
-# fill in required Supabase + Stripe test keys
+# fill in required Supabase auth, DO Spaces, + Stripe test keys
 docker compose up --build
 ```
 
