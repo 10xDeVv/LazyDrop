@@ -1,7 +1,5 @@
 # LazyDrop
 
-# LazyDrop
-
 [![Backend Tests](https://github.com/10xDeVv/LazyDrop/actions/workflows/backend-test.yml/badge.svg)](https://github.com/10xDeVv/LazyDrop/actions/workflows/backend-test.yml)
 [![Frontend Tests](https://github.com/10xDeVv/LazyDrop/actions/workflows/frontend-test.yml/badge.svg)](https://github.com/10xDeVv/LazyDrop/actions/workflows/frontend-test.yml)
 [![Docker Build](https://github.com/10xDeVv/LazyDrop/actions/workflows/docker-build.yml/badge.svg)](https://github.com/10xDeVv/LazyDrop/actions/workflows/docker-build.yml)
@@ -73,7 +71,6 @@ docker compose up --build
 
 - Frontend: http://localhost:3000  
 - Backend: http://localhost:8080  
-- API base: http://localhost:8080/api/v1  
 
 ---
 
@@ -81,8 +78,9 @@ docker compose up --build
 
 - **[SYSTEM_DESIGN.md](./SYSTEM_DESIGN.md)** — architecture + flows (uploads, sessions, webhooks, scaling notes)
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** — module breakdown + data model diagram
+- **[SCALING.md](./SCALING.md)** — phased scaling roadmap (single node → Kubernetes)
 - **[SECURITY.md](./SECURITY.md)** — security model and operational rules
-- **[CONTRIBUTING](./CONTRIBUTING)** — PR workflow + local dev + submodules
+- **[CONTRIBUTING.md](./CONTRIBUTING.md)** — PR workflow + local dev + submodules
 
 ---
 

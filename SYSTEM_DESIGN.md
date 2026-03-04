@@ -9,7 +9,7 @@ This document describes the architecture and key backend patterns used in LazyDr
 ```mermaid
 flowchart TB
   U[User Browser] -->|HTTPS| FE[Next.js Frontend]
-  FE -->|REST /api/v1| BE[Spring Boot API]
+  FE -->|REST API| BE[Spring Boot API]
   FE <--> |STOMP WebSocket| BE
 
   BE -->|JPA/Hibernate| DB[(PostgreSQL Database)]
@@ -200,9 +200,13 @@ This is enforced before resource creation (session creation, upload URL issuance
 
 ## Scheduled Cleanup Jobs
 
-Automated background jobs keep the system clean and consistent:
-- Expire sessions when `expires_at` is reached
-- Cleanup unconfirmed uploads after a timeout window
+Automated background jobs keep the system clean and consistent. All schedulers are **silent when idle** — they only log at `INFO` when actual work is done.
+
+| Job | Interval | What it does |
+|-----|----------|-------------|
+| `expireSessions` | every 60s | Finds sessions with `status IN (OPEN, CONNECTED)` and `expires_at < now`, marks them `EXPIRED`, broadcasts WS event, triggers file cleanup |
+| `cleanupDisconnectedParticipants` | every 5 min | Removes participants whose `disconnected_at` is older than 5 minutes |
+| `downgradeExpiredCanceledSubscriptions` | every 10 min | Downgrades `CANCELED` subscriptions past `current_period_end` to `FREE` |
 
 ```mermaid
 flowchart LR
@@ -210,6 +214,25 @@ flowchart LR
   Cleanup --> DB[(Postgres)]
   Cleanup -->|optional| Storage[DO Spaces / S3]
   Cleanup -->|broadcast| WS[STOMP Notifications]
+```
+
+### Logging behavior
+
+Scheduler ticks log at `DEBUG` level (invisible in production). Only when a job actually does something does it log at `INFO`:
+
+```
+INFO  Expired 2 session(s)
+INFO  Removed 1 disconnected participant(s)
+INFO  Downgraded 3 expired canceled subscription(s)
+```
+
+Complete silence otherwise. To debug the scheduler heartbeat, add to `application.yml`:
+
+```yaml
+logging:
+  level:
+    com.lazydrop.modules.session.core.scheduler: DEBUG
+    com.lazydrop.modules.subscription.scheduler: DEBUG
 ```
 
 ---
